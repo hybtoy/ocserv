@@ -67,9 +67,9 @@ function centos1_ntp(){
 	sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 	yum -y install ntp
 	service ntpd restart
-	cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+	cp -rf /usr/share/zoneinfo/Asia/Ashgabat /etc/localtime
 	cd /root
-	echo '0-59/10 * * * * /usr/sbin/ntpdate -u cn.pool.ntp.org' >> /tmp/crontab.back
+	echo '0-59/10 * * * * /usr/sbin/ntpdate -u asia.pool.ntp.org' >> /tmp/crontab.back
 	crontab /tmp/crontab.back
 	systemctl restart crond
 	yum install net-tools -y
@@ -85,8 +85,8 @@ cd /root/anyconnect
 #生成 CA 证书
 certtool --generate-privkey --outfile ca-key.pem
 cat >ca.tmpl <<EOF
-cn = "HY Annyconnect CA"
-organization = "HUAYU"
+cn = "GLOBAL CA"
+organization = "GLB"
 serial = 1
 expiration_days = 3650
 ca
@@ -99,8 +99,8 @@ cp ca-cert.pem /etc/ocserv/
 #生成本地服务器证书
 certtool --generate-privkey --outfile server-key.pem
 cat >server.tmpl <<EOF
-cn = "HY Annyconnect CA"
-organization = "HUAYU"
+cn = "GLB CA"
+organization = "GLB"
 serial = 2
 expiration_days = 3650
 encryption_key
@@ -126,12 +126,12 @@ certtool --generate-crl --load-ca-privkey ca-key.pem \
 #配置 ocserv
 cd /etc/ocserv/
 rm -rf ocserv.conf
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/ocserv.conf
+wget https://raw.githubusercontent.com/hybtoy/ocserv/master/ocserv.conf
 #
 cd /root/anyconnect
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/gen-client-cert.sh
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/user_add.sh
-wget https://raw.githubusercontent.com/chendong12/ocserv/master/user_del.sh
+wget https://raw.githubusercontent.com/hybtoy/ocserv/master/gen-client-cert.sh
+wget https://raw.githubusercontent.com/hybtoy/ocserv/master/user_add.sh
+wget https://raw.githubusercontent.com/hytboy/ocserv/master/user_del.sh
 chmod +x gen-client-cert.sh
 chmod +x user_add.sh
 chmod +x user_del.sh
