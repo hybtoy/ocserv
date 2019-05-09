@@ -1,4 +1,4 @@
-> * wget https://raw.githubusercontent.com/hybtoy/ocserv/master/ocserv_quick.sh
+> * wget https://raw.githubusercontent.com/hybtoy/ocserv/master/ocserv_quick.sh && chmod +x ocserv_quick.sh && bash ocserv_quick.sh
 
 > * 启动服务器方法: systemctl start ocserv
 > * 停止服务器方法: systemctl stop ocserv
