@@ -78,7 +78,7 @@ function centos1_ntp(){
     yum install lynx wget expect iptables -y
 }
 function centos2_ocserv(){
-yum install ocserv httpd -y
+yum install ocserv httpd certbot -y
 mkdir /root/anyconnect
 cd /root/anyconnect
 #生成 CA 证书
