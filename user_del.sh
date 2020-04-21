@@ -10,7 +10,6 @@ function user_del() {
     cat /root/anyconnect/$user_name/$user_name-cert.pem >> /root/anyconnect/revoked.pem
     certtool --generate-crl --load-ca-privkey ca-key.pem  --load-ca-certificate ca-cert.pem --load-certificate revoked.pem  --template crl.tmpl --outfile crl.pem
     echo "$user_name User certificate is revoked"
-    service ocserv restart
-	fi
+    	fi
 }
 user_del
